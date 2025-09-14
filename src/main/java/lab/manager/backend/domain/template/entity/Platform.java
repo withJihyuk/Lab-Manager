@@ -1,11 +1,12 @@
-package lab.manager.backend.domain.envVar.entity;
+package lab.manager.backend.domain.template.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 import java.util.UUID;
-import lab.manager.backend.domain.app.entity.App;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,22 +18,17 @@ import org.hibernate.annotations.UuidGenerator;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EnvVar {
+public class Platform {
 
   @Id
   @UuidGenerator(style = UuidGenerator.Style.RANDOM)
   private UUID id;
 
-  @ManyToOne
-  private App app;
-
-  @Column(name = "env_key")
-  private String key;
-
-  @Column(name = "env_value")
-  private String value;
+  @Column(nullable = false, unique = true)
+  private String name;
   
-  private Boolean isDeployKey;
+  private String description;
 
-  private Boolean isEncrypted;
+  @OneToMany(mappedBy = "platform", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<PlatformVersion> versions;
 }
