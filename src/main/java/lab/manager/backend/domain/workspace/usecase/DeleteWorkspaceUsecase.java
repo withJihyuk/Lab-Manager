@@ -28,13 +28,7 @@ public class DeleteWorkspaceUsecase {
     if (result.getOwner() != userUtil.getUser()) {
       throw new HttpException(HttpStatus.FORBIDDEN, "본인의 워크스페이스가 아닙니다.");
     }
-
-    try {
-      coreV1Api.deleteNamespace(request.getId().toString()).execute();
-    } catch (Exception e) {
-      throw new HttpException(HttpStatus.BAD_GATEWAY, "클러스터에 문제가 발생했습니다.");
-    }
-
+    
     workspaceRepository.delete(result);
   }
 }
