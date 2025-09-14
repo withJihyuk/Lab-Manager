@@ -1,5 +1,6 @@
 package lab.manager.backend.domain.envVar.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -25,8 +26,10 @@ public class EnvVar {
   @ManyToOne
   private App app;
 
+  @Column(name = "env_key")
   private String key;
 
+  @Column(name = "env_value")
   private String value;
 
   private Boolean isEncrypted;

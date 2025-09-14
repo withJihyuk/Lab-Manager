@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lab.manager.backend.domain.app.enums.AppStatus;
+import lab.manager.backend.domain.envVar.entity.EnvVar;
 import lab.manager.backend.domain.workspace.entity.Workspace;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,6 +41,9 @@ public class App {
   private String buildCommand;
 
   private String runCommand;
+
+  @OneToMany(mappedBy = "app", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<EnvVar> envVars = new ArrayList<>();
 
   @OneToMany(mappedBy = "app", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<AppPort> ports = new ArrayList<>();
