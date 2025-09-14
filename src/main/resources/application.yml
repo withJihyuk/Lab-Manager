@@ -17,7 +17,7 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     hikari:
-      driver-class-name: org.postgresql.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -39,3 +39,6 @@ jwt:
 cors:
   allowed-origins:
     - "http://localhost:3000"
+
+lab:
+  base-workspace: labmanager
